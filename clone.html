@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Chennai Aquarium - India's #1 Online Aquarium Store</title>
+    <style>
+        /* ============ RESET & VARIABLES ============ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        :root {
+            --primary: #006994;
+            --primary-dark: #003f5c;
+            --secondary: #ffd700;
+            --secondary-dark: #ffc800;
+            --light: #e6f3ff;
+            --white: #ffffff;
+            --black: #333333;
+            --gray: #666666;
+            --light-gray: #f5f5f5;
+            --shadow: 0 5px 20px rgba(0,105,148,0.15);
+            --shadow-hover: 0 8px 25px rgba(0,105,148,0.25);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--black);
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        /* ============ FISH ANIMATIONS ============ */
+        .aquarium-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+            background: linear-gradient(180deg, #a8d8ff 0%, #6bb5ff 50%, #4a9eff 100%);
+        }
+
+        .fish {
+            position: absolute;
+            font-size: 3.5rem;
+            opacity: 0.9;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
+            animation: swim linear infinite;
+            z-index: 6;
+            color: #ffaa00;
+            -webkit-text-stroke: 2px rgba(0,0,0,0.3);
+        }
+
+        .fish-1 { color: #FF6B6B; top: 15%; animation-duration: 22s; animation-delay: -2s; left: -10%; font-size: 3.8rem; }
+        .fish-2 { color: #4ECDC4; top: 35%; animation-duration: 28s; animation-delay: -8s; left: -15%; font-size: 4.2rem; }
+        .fish-3 { color: #FFE66D; top: 60%; animation-duration: 25s; animation-delay: -5s; left: -20%; font-size: 3.5rem; }
+        .fish-4 { color: #FF9F1C; top: 80%; animation-duration: 32s; animation-delay: -12s; left: -5%; font-size: 4rem; }
+        .fish-5 { color: #E71D36; top: 25%; animation-duration: 26s; animation-delay: -15s; left: -12%; font-size: 3.6rem; }
+        .fish-6 { color: #2EC4B6; top: 70%; animation-duration: 30s; animation-delay: -20s; left: -25%; font-size: 4.5rem; }
+        .fish-7 { color: #FFB347; top: 45%; animation-duration: 24s; animation-delay: -10s; left: -18%; font-size: 3.9rem; }
+        .fish-8 { color: #FF8C42; top: 90%; animation-duration: 35s; animation-delay: -18s; left: -8%; font-size: 4.8rem; }
+        .fish-9 { color: #A7C4C2; top: 50%; animation-duration: 29s; animation-delay: -7s; left: -22%; font-size: 3.7rem; }
+        .fish-10 { color: #D4A5A5; top: 10%; animation-duration: 33s; animation-delay: -25s; left: -30%; font-size: 4.1rem; }
+
+        @keyframes swim {
+            0% { transform: translateX(0) rotateY(0deg) scale(1); opacity: 0.95; }
+            49% { transform: translateX(120vw) rotateY(0deg) scale(1.1); opacity: 1; }
+            50% { transform: translateX(120vw) rotateY(180deg) scale(1.1); opacity: 1; }
+            99% { transform: translateX(-10vw) rotateY(180deg) scale(1); opacity: 0.95; }
+            100% { transform: translateX(-10vw) rotateY(0deg) scale(1); opacity: 0.95; }
+        }
+
+        .bubble {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.8rem;
+            animation: bubble 10s linear infinite;
+            pointer-events: none;
+            z-index: 6;
+            text-shadow: 0 0 10px white;
+            font-weight: bold;
+        }
+
+        @keyframes bubble {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            20% { opacity: 0.9; }
+            80% { opacity: 0.9; }
+            100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+        }
+
+        .bubble-1 { left: 10%; animation-delay: 0s; font-size: 2rem; }
+        .bubble-2 { left: 30%; animation-delay: 2s; font-size: 1.8rem; }
+        .bubble-3 { left: 50%; animation-delay: 4s; font-size: 2.2rem; }
+        .bubble-4 { left: 70%; animation-delay: 1s; font-size: 1.9rem; }
+        .bubble-5 { left: 90%; animation-delay: 3s; font-size: 2.1rem; }
+        .bubble-6 { left: 20%; animation-delay: 5s; font-size: 1.7rem; }
+        .bubble-7 { left: 80%; animation-delay: 6s; font-size: 2.3rem; }
+        .bubble-8 { left: 40%; animation-delay: 7s; font-size: 1.6rem; }
+        .bubble-9 { left: 60%; animation-delay: 8s; font-size: 2rem; }
+        .bubble-10 { left: 15%; animation-delay: 9s; font-size: 1.9rem; }
+
+        .page-wrapper {
+            position: relative;
+            z-index: 20;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            min-height: 100vh;
+            border-left: 1px solid rgba(255,255,255,0.3);
+            border-right: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .container {
+            width: 100%;
+            padding: 2rem 3%;
+            margin: 0 auto;
+        }
+
+        /* ============ HEADER ============ */
+        header {
+            background: linear-gradient(135deg, rgba(0,105,148,0.95), rgba(0,63,92,0.98));
+            color: white;
+            padding: 1rem 3%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            width: 100%;
+            backdrop-filter: blur(5px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .logo p {
+            font-size: 0.8rem;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            position: relative;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--secondary);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.8rem;
+            transition: var(--transition);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+            color: var(--secondary);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background: var(--secondary);
+            color: var(--primary-dark);
+            border-radius: 50%;
+            padding: 2px 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            min-width: 22px;
+            text-align: center;
+            border: 2px solid white;
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        /* ============ HERO SECTION ============ */
+        .hero {
+            background: linear-gradient(rgba(0,105,148,0.85), rgba(0,63,92,0.95)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect width="1200" height="400" fill="%23006994"/><circle cx="200" cy="150" r="15" fill="%23ffd700"/><circle cx="600" cy="200" r="20" fill="%23ffd700"/><circle cx="900" cy="100" r="18" fill="%23ffd700"/><circle cx="400" cy="300" r="12" fill="%23ffd700"/><circle cx="1000" cy="250" r="25" fill="%23ffd700"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 4rem 3%;
+            width: 100%;
+            border-bottom: 5px solid var(--secondary);
+            position: relative;
+            z-index: 25;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s both;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--secondary);
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: var(--primary-dark);
+        }
+
+        /* ============ SECTION TITLES ============ */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 25;
+        }
+
+        .section-title h3 {
+            font-size: 2.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+        }
+
+        .section-title h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ============ PRODUCTS GRID ============ */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 25;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            width: 100%;
+            position: relative;
+            border: 1px solid rgba(0,105,148,0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .product-img {
+            height: 200px;
+            background: linear-gradient(135deg, var(--light), white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 4rem;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.8rem 1.5rem;
+        }
+
+        .product-info h4 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .product-price {
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 1.4rem;
+            margin: 0.8rem 0;
+        }
+
+        .product-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+
+        /* ============ SEARCH BAR STYLES ============ */
+        .search-container {
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 0 15px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 50px;
+            padding: 5px 10px;
+            box-shadow: 0 5px 20px rgba(0,105,148,0.2);
+            border: 3px solid #006994;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .search-button {
+            background: #006994;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .search-button:hover {
+            background: #003f5c;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 15px;
+            right: 15px;
+            background: white;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+            border: 2px solid #006994;
+            border-top: none;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .result-item:hover {
+            background: #e6f3ff;
+        }
+
+        .result-icon {
+            font-size: 30px;
+            margin-right: 15px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result-info {
+            flex: 1;
+        }
+
+        .result-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #003f5c;
+        }
+
+        .result-price {
+            color: #006994;
+            font-weight: bold;
+        }
+
+        .no-results {
+            padding: 30px;
+            text-align: center;
+            color: #666;
+        }
+
+        /* ============ BUILD TANK ============ */
+        .build-tank {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(230,243,255,0.95));
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            width: 100%;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,105,148,0.2);
+            position: relative;
+            z-index: 25;
+            backdrop-filter: blur(5px);
+        }
+
+        .build-tank-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .build-tank h3 {
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+        }
+
+        .tank-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .tank-form input,
+        .tank-form select,
+        .tank-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .tank-form input:focus,
+        .tank-form select:focus,
+        .tank-form textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0,105,148,0.1);
+        }
+
+        /* ============ PROCESS STEPS ============ */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.8rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 25;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .step:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem;
+            font-size: 2.2rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,105,148,0.3);
+        }
+
+        .step:hover .step-icon {
+            transform: rotateY(180deg);
+            background: var(--secondary);
+            color: var(--primary-dark);
+        }
+
+        /* ============ SERVICES GRID ============ */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            position: relative;
+            z-index: 25;
+        }
+
+        .service-card {
+            background: rgba(255,255,255,0.95);
+            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.2);
+            color: var(--secondary);
+        }
+
+        /* ============ CONTACT GRID ============ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            position: relative;
+            z-index: 25;
+        }
+
+        .contact-info,
+        .contact-form {
+            background: rgba(255,255,255,0.95);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(5px);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.8rem;
+        }
+
+        .info-icon {
+            width: 55px;
+            height: 55px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-right: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        /* ============ CART SIDEBAR ============ */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.2);
+            transition: 0.4s ease;
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            background: rgba(0,63,92,0.98);
+            color: white;
+            padding: 4rem 3% 2rem;
+            width: 100%;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 25;
+            backdrop-filter: blur(5px);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ============ PAGE SECTIONS ============ */
+        .page-section {
+            display: none;
+            width: 100%;
+            animation: fadeIn 0.5s ease;
+            position: relative;
+            z-index: 25;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, rgba(0,105,148,0.95), rgba(0,63,92,0.98));
+            color: white;
+            text-align: center;
+            padding: 4rem 3%;
+            width: 100%;
+            position: relative;
+            z-index: 25;
+        }
+
+        .page-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+
+        /* ============ NOTIFICATION ============ */
+        .notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary-dark);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 3500;
+            transition: 0.4s;
+            font-size: 1rem;
+            font-weight: 600;
+            border-left: 5px solid var(--secondary);
+        }
+
+        .notification.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ============ RESPONSIVE BREAKPOINTS ============ */
+        @media screen and (max-width: 1100px) {
+            .products-grid { grid-template-columns: repeat(3, 1fr); }
+            .process-steps { grid-template-columns: repeat(3, 1fr); }
+            .fish { font-size: 3rem; }
+        }
+
+        @media screen and (max-width: 900px) {
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-content { grid-template-columns: repeat(2, 1fr); }
+            .build-tank-content { grid-template-columns: 1fr; }
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+                font-size: 2.2rem;
+                cursor: pointer;
+                background: none;
+                border: none;
+                color: white;
+                order: 1;
+                text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem 0;
+                order: 3;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .logo { order: 0; }
+            .cart-icon { order: 2; }
+
+            .hero h2 { font-size: 2rem; }
+            .hero p { font-size: 1.1rem; }
+            .section-title h3 { font-size: 1.8rem; }
+            
+            .contact-grid { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr; }
+            .fish { font-size: 2.8rem; }
+        }
+
+        @media screen and (max-width: 600px) {
+            .products-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+            
+            .hero h2 { font-size: 1.8rem; }
+            .btn { padding: 0.8rem 1.8rem; }
+            .cart-sidebar { width: 100%; right: -100%; }
+            .fish { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============ AQUARIUM ANIMATIONS ============ -->
+    <div class="aquarium-bg">
+        <div class="fish fish-1">🐟</div>
+        <div class="fish fish-2">🐠</div>
+        <div class="fish fish-3">🐡</div>
+        <div class="fish fish-4">🐋</div>
+        <div class="fish fish-5">🐬</div>
+        <div class="fish fish-6">🦈</div>
+        <div class="fish fish-7">🐙</div>
+        <div class="fish fish-8">🦑</div>
+        <div class="fish fish-9">🐟</div>
+        <div class="fish fish-10">🐠</div>
+        
+        <div class="bubble bubble-1">💭</div>
+        <div class="bubble bubble-2">💭</div>
+        <div class="bubble bubble-3">💭</div>
+        <div class="bubble bubble-4">💭</div>
+        <div class="bubble bubble-5">💭</div>
+        <div class="bubble bubble-6">💭</div>
+        <div class="bubble bubble-7">💭</div>
+        <div class="bubble bubble-8">💭</div>
+        <div class="bubble bubble-9">💭</div>
+        <div class="bubble bubble-10">💭</div>
+    </div>
+
+    <!-- ============ MAIN WRAPPER ============ -->
+    <div class="page-wrapper">
+        <!-- ============ CART SIDEBAR ============ -->
+        <div class="cart-sidebar" id="cartSidebar">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h3 style="color: var(--primary-dark); font-size: 1.8rem;">🛒 Your Cart</h3>
+                <button id="closeCart" style="font-size: 2rem; background: none; border: none; cursor: pointer;">✕</button>
+            </div>
+            <div id="cartItems" style="flex: 1; overflow-y: auto;"></div>
+            <div id="cartTotal" style="font-size: 1.5rem; font-weight: bold; color: var(--primary-dark); margin: 1.5rem 0;"></div>
+            <button id="checkoutBtn" class="btn" style="width: 100%;">Proceed to Checkout</button>
+        </div>
+
+        <!-- ============ HEADER ============ -->
+        <header>
+            <nav>
+                <div class="logo">
+                    <h1>🐠 Chennai Aquarium</h1>
+                    <p>India's #1 Online Aquarium Store</p>
+                </div>
+                
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#products" class="nav-link">Products</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                
+                <div class="cart-icon" id="cartIcon">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </nav>
+        </header>
+
+        <!-- ============ HOME PAGE ============ -->
+        <div id="home" class="page-section active">
+            <div class="hero">
+                <h2>Welcome to Chennai Aquarium</h2>
+                <p>Experience the magic of underwater world at your home</p>
+                <div class="hero-buttons">
+                    <button class="btn" onclick="showSection('products')">Shop Now</button>
+                    <button class="btn btn-outline" onclick="scrollToBuildTank()">Build Your Tank</button>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="section-title">
+                    <h3>🐟 EXOTIC FISH & LATEST PRODUCTS</h3>
+                    <p>Discover our premium collection handpicked for you</p>
+                </div>
+
+                <div class="products-grid" id="featuredProducts"></div>
+
+                <div id="buildTank" class="build-tank">
+                    <div class="build-tank-content">
+                        <div>
+                            <h3>🔨 BUILD YOUR TANK</h3>
+                            <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">Tell us your dream aquarium specifications. Our experts will design and deliver a custom tank just for you.</p>
+                            <button class="btn" onclick="submitTankQuote()">Get Free Quote →</button>
+                        </div>
+                        <div class="tank-form">
+                            <input type="text" id="tankName" placeholder="Your Full Name">
+                            <input type="email" id="tankEmail" placeholder="Email Address">
+                            <input type="tel" id="tankPhone" placeholder="Phone Number">
+                            <select id="tankShape">
+                                <option value="">Select Tank Shape</option>
+                                <option value="rectangular">Rectangular</option>
+                                <option value="square">Square</option>
+                                <option value="corner">Corner</option>
+                                <option value="custom">Custom Design</option>
+                            </select>
+                            <textarea id="tankDetails" rows="3" placeholder="Tell us about your dream tank (dimensions, style, etc.)"></textarea>
+                            <button class="btn" style="width: 100%;" onclick="submitTankQuote()">Submit Request</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title">
+                    <h3>⚙️ OUR PROCESS</h3>
+                    <p>5 simple steps to your dream aquarium</p>
+                </div>
+
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-icon">💬</div>
+                        <h4>CONSULTATION</h4>
+                        <p>Expert advice & planning</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">✏️</div>
+                        <h4>DESIGN</h4>
+                        <p>Custom 3D modeling</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">🔧</div>
+                        <h4>BUILD</h4>
+                        <p>Premium craftsmanship</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">🐟</div>
+                        <h4>STOCKING</h4>
+                        <p>Expert fish selection</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">🧹</div>
+                        <h4>MAINTENANCE</h4>
+                        <p>Regular care services</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ PRODUCTS PAGE ============ -->
+        <div id="products" class="page-section">
+            <div class="page-header">
+                <h2>🐠 Our Premium Products</h2>
+                <p>Everything you need for your aquatic paradise</p>
+            </div>
+
+            <!-- SEARCH BAR - FULLY FUNCTIONAL NOW -->
+            <div class="search-container">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="🔍 Search for Discus, Betta, Shrimp, Guppy..." 
+                        autocomplete="off"
+                        onkeyup="handleSearchKeyUp(event)"
+                    >
+                    <button class="search-button" onclick="performSearch()">
+                        <span>🔍</span> Search Fish
+                    </button>
+                </div>
+                <div id="searchResults" class="search-results"></div>
+            </div>
+
+            <div class="container">
+                <div class="section-title">
+                    <h3>Fish & Livestock</h3>
+                    <p>Healthy, vibrant fish direct from premium breeders</p>
+                </div>
+                <div class="products-grid" id="fishProducts"></div>
+
+                <div class="section-title" style="margin-top: 4rem;">
+                    <h3>Equipment & Accessories</h3>
+                    <p>Top brands, best prices</p>
+                </div>
+                <div class="products-grid" id="equipmentProducts"></div>
+            </div>
+        </div>
+
+        <!-- ============ SERVICES PAGE ============ -->
+        <div id="services" class="page-section">
+            <div class="page-header">
+                <h2>🔧 Our Services</h2>
+                <p>Complete aquarium solutions under one roof</p>
+            </div>
+
+            <div class="container">
+                <div class="services-grid" id="servicesGrid"></div>
+            </div>
+        </div>
+
+        <!-- ============ CONTACT PAGE ============ -->
+        <div id="contact" class="page-section">
+            <div class="page-header">
+                <h2>📞 Contact Us</h2>
+                <p>We're here to help 24/7</p>
+            </div>
+
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3 style="color: var(--primary-dark); font-size: 1.8rem; margin-bottom: 2rem;">Get In Touch</h3>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">📍</div>
+                            <div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.3rem;">Visit Us</h4>
+                                <p style="font-size: 1.1rem;">123 Aquarium Street, Anna Nagar, Chennai - 600040</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">📞</div>
+                            <div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.3rem;">Call Us</h4>
+                                <p style="font-size: 1.1rem;">+91 98765 43210</p>
+                                <p style="font-size: 1.1rem;">+91 98765 43211</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">✉️</div>
+                            <div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.3rem;">Email</h4>
+                                <p style="font-size: 1.1rem;">info@chennaiaquarium.in</p>
+                                <p style="font-size: 1.1rem;">support@chennaiaquarium.in</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">⏰</div>
+                            <div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.3rem;">Business Hours</h4>
+                                <p style="font-size: 1.1rem;">Mon-Sat: 10:00 AM - 8:00 PM</p>
+                                <p style="font-size: 1.1rem;">Sun: 11:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form">
+                        <h3 style="color: var(--primary-dark); font-size: 1.8rem; margin-bottom: 2rem;">Send Message</h3>
+                        <form id="contactForm">
+                            <div style="margin-bottom: 1.2rem;">
+                                <input type="text" id="contactName" placeholder="Your Full Name" style="width: 100%; padding: 1rem; border: 2px solid #eee; border-radius: 8px;">
+                            </div>
+                            <div style="margin-bottom: 1.2rem;">
+                                <input type="email" id="contactEmail" placeholder="Email Address" style="width: 100%; padding: 1rem; border: 2px solid #eee; border-radius: 8px;">
+                            </div>
+                            <div style="margin-bottom: 1.2rem;">
+                                <input type="tel" id="contactPhone" placeholder="Phone Number" style="width: 100%; padding: 1rem; border: 2px solid #eee; border-radius: 8px;">
+                            </div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <textarea id="contactMessage" rows="4" placeholder="Your Message" style="width: 100%; padding: 1rem; border: 2px solid #eee; border-radius: 8px;"></textarea>
+                            </div>
+                            <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem; height: 350px; background: var(--light); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.5rem; border: 3px dashed var(--primary);">
+                    🗺️ Google Map Location - Chennai, Tamil Nadu
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ FOOTER ============ -->
+        <footer>
+            <div class="footer-content">
+                <div>
+                    <h4 style="color: var(--secondary); font-size: 1.3rem; margin-bottom: 1.2rem;">Chennai Aquarium</h4>
+                    <p style="line-height: 1.6; font-size: 1rem;">India's most trusted aquarium store since 2010. Premium quality live fish, plants, and equipment with expert support.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--secondary); font-size: 1.3rem; margin-bottom: 1.2rem;">Quick Links</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.8rem;"><a href="#home" onclick="showSection('home')" style="color: white; text-decoration: none; font-size: 1rem;">Home</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#products" onclick="showSection('products')" style="color: white; text-decoration: none; font-size: 1rem;">Products</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#services" onclick="showSection('services')" style="color: white; text-decoration: none; font-size: 1rem;">Services</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#contact" onclick="showSection('contact')" style="color: white; text-decoration: none; font-size: 1rem;">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--secondary); font-size: 1.3rem; margin-bottom: 1.2rem;">Products</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: white; text-decoration: none; font-size: 1rem;">Freshwater Fish</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: white; text-decoration: none; font-size: 1rem;">Marine Fish</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: white; text-decoration: none; font-size: 1rem;">Aquarium Plants</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: white; text-decoration: none; font-size: 1rem;">Shrimp & Snails</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--secondary); font-size: 1.3rem; margin-bottom: 1.2rem;">Services</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: white; text-decoration: none; font-size: 1rem;">Custom Tanks</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: white; text-decoration: none; font-size: 1rem;">Aquascaping</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: white; text-decoration: none; font-size: 1rem;">Installation</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: white; text-decoration: none; font-size: 1rem;">Maintenance</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 3rem; margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem;">© 2024 Chennai Aquarium. All rights reserved. | Made with 💙 for fish lovers</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ============ NOTIFICATION ============ -->
+    <div class="notification" id="notification"></div>
+
+    <!-- ============ COMPLETE FIXED JAVASCRIPT - WITH SEARCH & CART ============ -->
+    <script>
+        // ============ PRODUCT DATABASE WITH STOCK ============
+        const products = [
+            { id: 1, name: "Discus Fish", description: "Premium imported Discus - King of aquarium", price: 1999, category: "featured", icon: "🐠", stock: 15 },
+            { id: 2, name: "Cherry Shrimp", description: "Red Cherry Shrimp - 10 pcs, algae cleaners", price: 499, category: "featured", icon: "🦐", stock: 50 },
+            { id: 3, name: "Aquarium Plants", description: "Live aquatic plants bundle - 5 species", price: 799, category: "featured", icon: "🌿", stock: 30 },
+            { id: 4, name: "LED Light", description: "Full spectrum RGB aquarium light", price: 2499, category: "featured", icon: "💡", stock: 20 },
+            { id: 5, name: "Angelfish", description: "Freshwater Angelfish - Pair, Marble variety", price: 899, category: "fish", icon: "🐟", stock: 25 },
+            { id: 6, name: "Betta Fish", description: "Halfmoon Betta - Premium colors", price: 399, category: "fish", icon: "🐡", stock: 40 },
+            { id: 7, name: "Amano Shrimp", description: "Algae eating shrimp - 5 pcs", price: 599, category: "fish", icon: "🦐", stock: 35 },
+            { id: 8, name: "Nerite Snails", description: "Algae control snails - 3 pcs", price: 299, category: "fish", icon: "🐌", stock: 60 },
+            { id: 9, name: "Guppy Fish", description: "Fancy Guppy - 6 pcs, mixed colors", price: 349, category: "fish", icon: "🐠", stock: 45 },
+            { id: 10, name: "Neon Tetra", description: "School of 10 fish", price: 399, category: "fish", icon: "🐟", stock: 55 },
+            { id: 11, name: "Aquarium Filter", description: "Hang-on-back filter, 1000L/H", price: 1299, category: "equipment", icon: "🔍", stock: 18 },
+            { id: 12, name: "Heater", description: "Adjustable 100W aquarium heater", price: 899, category: "equipment", icon: "🌡️", stock: 22 },
+            { id: 13, name: "Aquarium Substrate", description: "Nutrient-rich plant soil - 5kg", price: 649, category: "equipment", icon: "🏝️", stock: 28 },
+            { id: 14, name: "Driftwood", description: "Natural Malaysian driftwood", price: 449, category: "equipment", icon: "🎭", stock: 15 },
+            { id: 15, name: "Air Pump", description: "Silent air pump, dual outlet", price: 599, category: "equipment", icon: "💨", stock: 25 },
+            { id: 16, name: "Water Conditioner", description: "500ml, removes chlorine", price: 299, category: "equipment", icon: "💧", stock: 40 }
+        ];
+
+        const services = [
+            { id: 1, name: "Custom Tank Building", description: "Custom sized aquariums with premium glass & silicone", icon: "🏗️" },
+            { id: 2, name: "Aquascaping Design", description: "Nature aquarium, Iwagumi, Dutch style layouts", icon: "🎨" },
+            { id: 3, name: "Installation Service", description: "Complete setup with plumbing and electrical", icon: "🛠️" },
+            { id: 4, name: "Maintenance Service", description: "Weekly/bi-weekly aquarium maintenance", icon: "🧹" },
+            { id: 5, name: "Fish Health Care", description: "Professional treatment for fish diseases", icon: "🐠" },
+            { id: 6, name: "Aquarium Workshop", description: "Learn aquascaping from master artists", icon: "📚" }
+        ];
+
+        // ============ CART SYSTEM ============
+        let cart = [];
+
+        function loadCart() {
+            const savedCart = localStorage.getItem('aquariumCart');
+            if (savedCart) cart = JSON.parse(savedCart);
+            updateCartUI();
+        }
+
+        function saveCart() {
+            localStorage.setItem('aquariumCart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Check stock
+            if (product.stock <= 0) {
+                showNotification('❌ Out of stock!');
+                return;
+            }
+
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            // Reduce stock
+            product.stock -= 1;
+            
+            saveCart();
+            showNotification(`✨ ${product.name} added to cart!`);
+            
+            // Refresh product display
+            renderProducts();
+        }
+
+        function removeFromCart(productId) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+            
+            // Restore stock
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                product.stock += item.quantity;
+            }
+            
+            cart = cart.filter(i => i.id !== productId);
+            saveCart();
+            showNotification(`🗑️ ${item.name} removed from cart`);
+            
+            // Refresh product display
+            renderProducts();
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartCountElement = document.getElementById('cartCount');
+            if (cartCountElement) cartCountElement.textContent = totalItems;
+
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartTotalElement = document.getElementById('cartTotal');
+            
+            if (!cartItemsContainer || !cartTotalElement) return;
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<div style="text-align: center; padding: 3rem; color: #666;">🛒 Your cart is empty</div>';
+                cartTotalElement.textContent = 'Total: ₹0';
+            } else {
+                let html = '';
+                let total = 0;
+                
+                cart.forEach(item => {
+                    total += item.price * item.quantity;
+                    html += `
+                        <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: #f8f8f8; border-radius: 10px; margin-bottom: 1rem;">
+                            <div style="font-size: 2rem;">${item.icon}</div>
+                            <div style="flex: 1;">
+                                <div style="font-weight: bold; color: var(--primary-dark);">${item.name}</div>
+                                <div style="color: var(--primary);">₹${item.price} x ${item.quantity}</div>
+                            </div>
+                            <button onclick="removeFromCart(${item.id})" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #ff4444;">✕</button>
+                        </div>
+                    `;
+                });
+                
+                cartItemsContainer.innerHTML = html;
+                cartTotalElement.textContent = `Total: ₹${total}`;
+            }
+        }
+
+        // ============ RENDER PRODUCTS ============
+        function renderProducts() {
+            // Featured Products
+            const featuredContainer = document.getElementById('featuredProducts');
+            if (featuredContainer) {
+                featuredContainer.innerHTML = products.filter(p => p.category === 'featured').map(p => `
+                    <div class="product-card">
+                        <div class="product-img">${p.icon}</div>
+                        <div class="product-info">
+                            <h4>${p.name}</h4>
+                            <p style="color: #666; font-size: 0.9rem;">${p.description}</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="product-price">₹${p.price}</div>
+                                <span style="color: ${p.stock > 0 ? '#2e7d32' : '#ff4444'}; font-size: 0.8rem;">
+                                    ${p.stock > 0 ? `✓ ${p.stock} in stock` : '✗ Out of stock'}
+                                </span>
+                            </div>
+                            <button class="product-btn" onclick="addToCart(${p.id})" ${p.stock === 0 ? 'disabled style="opacity:0.5;"' : ''}>
+                                ${p.stock > 0 ? '🛒 Add to Cart' : '❌ Out of Stock'}
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Fish Products
+            const fishContainer = document.getElementById('fishProducts');
+            if (fishContainer) {
+                fishContainer.innerHTML = products.filter(p => p.category === 'fish').map(p => `
+                    <div class="product-card">
+                        <div class="product-img">${p.icon}</div>
+                        <div class="product-info">
+                            <h4>${p.name}</h4>
+                            <p style="color: #666; font-size: 0.9rem;">${p.description}</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="product-price">₹${p.price}</div>
+                                <span style="color: ${p.stock > 0 ? '#2e7d32' : '#ff4444'}; font-size: 0.8rem;">
+                                    ${p.stock > 0 ? `✓ ${p.stock} in stock` : '✗ Out of stock'}
+                                </span>
+                            </div>
+                            <button class="product-btn" onclick="addToCart(${p.id})" ${p.stock === 0 ? 'disabled style="opacity:0.5;"' : ''}>
+                                ${p.stock > 0 ? '🛒 Add to Cart' : '❌ Out of Stock'}
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Equipment Products
+            const equipmentContainer = document.getElementById('equipmentProducts');
+            if (equipmentContainer) {
+                equipmentContainer.innerHTML = products.filter(p => p.category === 'equipment').map(p => `
+                    <div class="product-card">
+                        <div class="product-img">${p.icon}</div>
+                        <div class="product-info">
+                            <h4>${p.name}</h4>
+                            <p style="color: #666; font-size: 0.9rem;">${p.description}</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="product-price">₹${p.price}</div>
+                                <span style="color: ${p.stock > 0 ? '#2e7d32' : '#ff4444'}; font-size: 0.8rem;">
+                                    ${p.stock > 0 ? `✓ ${p.stock} in stock` : '✗ Out of stock'}
+                                </span>
+                            </div>
+                            <button class="product-btn" onclick="addToCart(${p.id})" ${p.stock === 0 ? 'disabled style="opacity:0.5;"' : ''}>
+                                ${p.stock > 0 ? '🛒 Add to Cart' : '❌ Out of Stock'}
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Services
+            const servicesContainer = document.getElementById('servicesGrid');
+            if (servicesContainer) {
+                servicesContainer.innerHTML = services.map(s => `
+                    <div class="service-card">
+                        <div class="service-icon">${s.icon}</div>
+                        <h4 style="font-size: 1.3rem; margin-bottom: 1rem;">${s.name}</h4>
+                        <p style="color: #666; margin-bottom: 1.5rem;">${s.description}</p>
+                        <button class="btn" onclick="showNotification('📞 Thank you! We will contact you soon.')">Book Now</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // ============ SEARCH FUNCTIONALITY ============
+        
+        function handleSearchKeyUp(event) {
+            const query = event.target.value.trim();
+            if (query.length >= 2) {
+                performLiveSearch(query);
+            } else {
+                const resultsDiv = document.getElementById('searchResults');
+                if (resultsDiv) resultsDiv.classList.remove('active');
+            }
+        }
+
+        function performLiveSearch(query) {
+            query = query.toLowerCase();
+            
+            const results = products.filter(item => 
+                item.name.toLowerCase().includes(query) || 
+                item.description.toLowerCase().includes(query) ||
+                item.category.toLowerCase().includes(query)
+            );
+            
+            displaySearchResults(results, query);
+        }
+
+        function displaySearchResults(results, query) {
+            const resultsDiv = document.getElementById('searchResults');
+            if (!resultsDiv) return;
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = `
+                    <div class="no-results">
+                        <span style="font-size: 40px;">🐟❓</span>
+                        <h3>No fish found for "${query}"</h3>
+                        <p style="margin-top: 10px; color: #666;">Try searching for: Discus, Betta, Guppy, Tetra...</p>
+                    </div>
+                `;
+                resultsDiv.classList.add('active');
+                return;
+            }
+            
+            let html = '';
+            results.slice(0, 5).forEach(item => {
+                const stockStatus = item.stock > 0 ? 
+                    `<span style="color: #2e7d32;">✓ In Stock (${item.stock})</span>` : 
+                    `<span style="color: #ff4444;">✗ Out of Stock</span>`;
+                
+                html += `
+                    <div class="result-item" onclick="selectProduct(${item.id})">
+                        <div class="result-icon">${item.icon}</div>
+                        <div class="result-info">
+                            <div class="result-name">${highlightMatch(item.name, query)}</div>
+                            <div style="color: #666; font-size: 13px;">${highlightMatch(item.description, query)}</div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+                                <span class="result-price">₹${item.price}</span>
+                                ${stockStatus}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            if (results.length > 5) {
+                html += `
+                    <div style="padding: 12px; text-align: center; background: #f5f5f5; border-radius: 0 0 20px 20px;">
+                        <span style="color: var(--primary); font-weight: bold;">
+                            + ${results.length - 5} more results
+                        </span>
+                    </div>
+                `;
+            }
+            
+            resultsDiv.innerHTML = html;
+            resultsDiv.classList.add('active');
+        }
+
+        function highlightMatch(text, query) {
+            if (!query) return text;
+            const regex = new RegExp(`(${query})`, 'gi');
+            return text.replace(regex, '<span style="background: #ffd700; color: #003f5c; padding: 2px 6px; border-radius: 3px; font-weight: bold;">$1</span>');
+        }
+
+        // ✅ FIXED: Click search result = Add to cart + Open cart
+        function selectProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Close search results
+            const resultsDiv = document.getElementById('searchResults');
+            if (resultsDiv) resultsDiv.classList.remove('active');
+            
+            // Clear search input
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) searchInput.value = product.name;
+            
+            // ✅ ADD TO CART AUTOMATICALLY
+            addToCart(productId);
+            
+            // ✅ OPEN CART SIDEBAR
+            const cartSidebar = document.getElementById('cartSidebar');
+            if (cartSidebar) cartSidebar.classList.add('active');
+            
+            // Switch to products page to show the item
+            showSection('products');
+            
+            showNotification(`🔍 Found & Added: ${product.name} - ₹${product.price}`);
+        }
+
+        function performSearch() {
+            const input = document.getElementById('searchInput');
+            if (!input) return;
+            
+            const query = input.value.trim();
+            
+            if (query.length === 0) {
+                showNotification('🔍 Please enter what you want to search');
+                return;
+            }
+            
+            if (query.length >= 2) {
+                performLiveSearch(query);
+            } else {
+                showNotification('🔍 Please enter at least 2 characters');
+            }
+        }
+
+        // ============ OTHER FUNCTIONS ============
+        function showSection(sectionId) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            const section = document.getElementById(sectionId);
+            if (section) section.classList.add('active');
+            
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            const activeLink = document.querySelector(`[href="#${sectionId}"]`);
+            if (activeLink) activeLink.classList.add('active');
+            
+            const navLinks = document.getElementById('navLinks');
+            if (navLinks) navLinks.classList.remove('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToBuildTank() {
+            const buildTank = document.getElementById('buildTank');
+            if (buildTank) buildTank.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function submitTankQuote() {
+            const fields = ['tankName', 'tankEmail', 'tankPhone', 'tankShape', 'tankDetails'];
+            const empty = fields.some(f => {
+                const element = document.getElementById(f);
+                return !element || !element.value;
+            });
+            
+            if (empty) {
+                showNotification('⚠️ Please fill in all fields');
+                return;
+            }
+            
+            showNotification('✅ Quote request sent! We\'ll reply within 24 hours.');
+            fields.forEach(f => {
+                const element = document.getElementById(f);
+                if (element) element.value = '';
+            });
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            if (!notification) return;
+            
+            notification.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => notification.classList.remove('show'), 3000);
+        }
+
+        // ============ EVENT LISTENERS ============
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            loadCart();
+
+            // Mobile menu
+            const menuToggle = document.getElementById('menuToggle');
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    const navLinks = document.getElementById('navLinks');
+                    if (navLinks) navLinks.classList.toggle('active');
+                });
+            }
+
+            // Cart
+            const cartIcon = document.getElementById('cartIcon');
+            if (cartIcon) {
+                cartIcon.addEventListener('click', function() {
+                    const cartSidebar = document.getElementById('cartSidebar');
+                    if (cartSidebar) cartSidebar.classList.add('active');
+                });
+            }
+
+            const closeCart = document.getElementById('closeCart');
+            if (closeCart) {
+                closeCart.addEventListener('click', function() {
+                    const cartSidebar = document.getElementById('cartSidebar');
+                    if (cartSidebar) cartSidebar.classList.remove('active');
+                });
+            }
+
+            // Navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        showSection(href.substring(1));
+                    }
+                });
+            });
+
+            // Contact form
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    showNotification('📧 Message sent! We\'ll reply within 24 hours.');
+                    this.reset();
+                });
+            }
+
+            // Checkout
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', function() {
+                    if (cart.length === 0) {
+                        showNotification('🛒 Your cart is empty');
+                    } else {
+                        showNotification('🔒 Redirecting to secure checkout...');
+                    }
+                });
+            }
+
+            // Close search results when clicking outside
+            document.addEventListener('click', function(e) {
+                const searchContainer = document.querySelector('.search-container');
+                if (searchContainer && !searchContainer.contains(e.target)) {
+                    const resultsDiv = document.getElementById('searchResults');
+                    if (resultsDiv) resultsDiv.classList.remove('active');
+                }
+                
+                // Close mobile menu when clicking outside
+                if (!e.target.closest('nav') && !e.target.closest('.menu-toggle')) {
+                    const navLinks = document.getElementById('navLinks');
+                    if (navLinks) navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Make functions globally available
+        window.addToCart = addToCart;
+        window.removeFromCart = removeFromCart;
+        window.showSection = showSection;
+        window.scrollToBuildTank = scrollToBuildTank;
+        window.submitTankQuote = submitTankQuote;
+        window.showNotification = showNotification;
+        window.handleSearchKeyUp = handleSearchKeyUp;
+        window.performSearch = performSearch;
+        window.selectProduct = selectProduct;
+        window.highlightMatch = highlightMatch;
+    </script>
+    <!-- REMOVED: <script src="database.js"></script> - You don't need this -->
+</body>
+</html>
